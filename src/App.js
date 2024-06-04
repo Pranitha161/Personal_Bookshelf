@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
-
+import BookPage from './components/bookpage/BookPage';
+import BookSearch from './components/bookSearch/BookSearch';
+import {RouterProvider,createBrowserRouter} from 'react-router-dom';
+import Bookshelf from './components/bookshelf/Bookshelf';
 function App() {
+  let router=createBrowserRouter([
+    {
+      path:'',
+      element:<BookPage/>,
+      children:[
+        {
+          path:'/searchpage',
+          element:<BookSearch/>
+        },
+        {
+          path:'/bookshelf',
+          element:<Bookshelf/>
+        }
+      ]
+    }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <RouterProvider router={router}/>
     </div>
   );
 }
